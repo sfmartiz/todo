@@ -54,7 +54,7 @@ if "timers.db" in listdir():
     db_session = Session()
 
     for entry in db_session.query(db.Timers).all():
-        newobject = globals()[f"{entry.type}Timer"](entry.comment, entry.last_clicked, json.loads(entry.data))
+        newobject = timerclass_dict[entry.type](entry.comment, entry.last_clicked, json.loads(entry.data))
         timers[entry.id] = [entry.type, newobject]
 
     settings_query = db_session.query(db.Settings).all()
@@ -291,7 +291,7 @@ class NewEntryWindow(Toplevel):
             db_entry.data = json.dumps(args)
             
         db_session.commit()
-        timers[editID] = [timertype, globals()[f"{timertype}Timer"](comment, 0, args)]
+        timers[editID] = [timertype, timerclass_dict[timertype](comment, 0, args)]
         
         populate()
         self.destroy()

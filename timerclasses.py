@@ -181,3 +181,13 @@ class MonthlyTimer(TimerTemplate):
     
     def nextdeadline(self):
         return int(datetime.timestamp(max(self.__gettimers())))
+
+
+timerclass_dict = {
+    "Daily": DailyTimer,
+    "Weekly": WeeklyTimer,
+    "Weekday": WeekdayTimer,
+    "Monthly": MonthlyTimer,
+    "Custom": CustomTimer,
+    "Once": OnceTimer
+}
