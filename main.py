@@ -340,7 +340,7 @@ def task_finished(objid):
         timers[objid][1].lastclicked = time_int()
 
         db_entry = db_session.query(db.Timers).get(objid)
-        db_entry.value = time_int()
+        db_entry.last_clicked = time_int()
         db_session.commit()
 
         populate()
@@ -351,7 +351,7 @@ def uncheck_task(objid):
     timers[objid][1].lastclicked = 0
     
     db_entry = db_session.query(db.Timers).get(objid)
-    db_entry.value = 0
+    db_entry.last_clicked = 0
     db_session.commit()
     
     populate()
